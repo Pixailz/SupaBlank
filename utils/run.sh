@@ -1,97 +1,97 @@
 #!/bin/bash
 
-FILES=(
-	"rendering/raycast/vertical.o"
-	"rendering/raycast/horizontal.o"
-	"rendering/raycast/get_text.o"
-	"rendering/raycast/cast.o"
-	"rendering/utils.2.o"
-	"rendering/texture/load.animated.o"
-	"rendering/texture/load.o"
-	"rendering/texture/get.highest.o"
-	"rendering/texture/load.size.o"
-	"rendering/move/dir.o"
-	"rendering/move/angle.o"
-	"rendering/move/keypress.o"
-	"rendering/utils.1.o"
-	"rendering/draw/frame.o"
-	"rendering/draw/minimap/fov_ray_horizontal.o"
-	"rendering/draw/minimap/player.o"
-	"rendering/draw/minimap/fov_raycast.o"
-	"rendering/draw/minimap/fov_draw.o"
-	"rendering/draw/minimap/minimap.o"
-	"rendering/draw/minimap/in_circle.o"
-	"rendering/draw/minimap/fov_ray_vertical.o"
-	"rendering/draw/minimap/utils.o"
-	"rendering/draw/minimap/update_minimap.o"
-	"rendering/draw/line.o"
-	"rendering/draw/hit.o"
-	"rendering/draw/switch_textures.o"
-	"rendering/draw/raycast.o"
-	"rendering/draw/fov.o"
-	"debug/render.o"
-	"debug/keypress.o"
-	"debug/error.o"
-	"debug/render.line.o"
-	"debug/print.o"
-	"debug/parsing.o"
-	"debug/ray.o"
-	"debug/map.o"
-	"parsing/utils.1.o"
-	"parsing/params.o"
-	"parsing/line/color.o"
-	"parsing/line/texture.o"
-	"parsing/line/file_list/list.o"
-	"parsing/line/entry.o"
-	"parsing/dup_map_squared.o"
-	"parsing/ft_cub3d_split.o"
-	"parsing/entry.o"
-	"parsing/map/check.door.surrounded.o"
-	"parsing/map/check.surrounded.o"
-	"parsing/map/entry.o"
-	"parsing/map/content.o"
-	"error/set/texture.o"
-	"error/set/params.o"
-	"error/set/entry.o"
-	"error/print/malloc.o"
-	"error/print/params.known.o"
-	"error/print/texture.known.o"
-	"error/print/texture.o"
-	"error/print/error_no_print.o"
-	"error/print/params.o"
-	"error/print/entry.o"
-	"error/print/params.color.o"
-	"error/utils.o"
-	"main.o"
-	"dataset/init/player.o"
-	"dataset/init/mlx.hook.mouse.o"
-	"dataset/init/rendering.o"
-	"dataset/init/texture.o"
-	"dataset/init/minimap.o"
-	"dataset/init/mlx.hook.o"
-	"dataset/init/config.o"
-	"dataset/init/file.o"
-	"dataset/init/mlx.o"
-	"dataset/init/parse.o"
-	"dataset/free/texture.o"
-	"dataset/free/mlx.hook.o"
-	"dataset/free/config.o"
-	"dataset/free/file.o"
-	"dataset/free/mlx.o"
-	"dataset/free/parse.o"
-)
-
 # FILES=(
-# 	"file.1.o"
-# 	"file.2.o"
-# 	"file.3.o"
-# 	"file.4.o"
-# 	"file.with.long.name.o"
-# 	"file.with.very.very.very.long.name.o"
+# 	"rendering/raycast/vertical.o"
+# 	"rendering/raycast/horizontal.o"
+# 	"rendering/raycast/get_text.o"
+# 	"rendering/raycast/cast.o"
+# 	"rendering/utils.2.o"
+# 	"rendering/texture/load.animated.o"
+# 	"rendering/texture/load.o"
+# 	"rendering/texture/get.highest.o"
+# 	"rendering/texture/load.size.o"
+# 	"rendering/move/dir.o"
+# 	"rendering/move/angle.o"
+# 	"rendering/move/keypress.o"
+# 	"rendering/utils.1.o"
+# 	"rendering/draw/frame.o"
+# 	"rendering/draw/minimap/fov_ray_horizontal.o"
+# 	"rendering/draw/minimap/player.o"
+# 	"rendering/draw/minimap/fov_raycast.o"
+# 	"rendering/draw/minimap/fov_draw.o"
+# 	"rendering/draw/minimap/minimap.o"
+# 	"rendering/draw/minimap/in_circle.o"
+# 	"rendering/draw/minimap/fov_ray_vertical.o"
+# 	"rendering/draw/minimap/utils.o"
+# 	"rendering/draw/minimap/update_minimap.o"
+# 	"rendering/draw/line.o"
+# 	"rendering/draw/hit.o"
+# 	"rendering/draw/switch_textures.o"
+# 	"rendering/draw/raycast.o"
+# 	"rendering/draw/fov.o"
+# 	"debug/render.o"
+# 	"debug/keypress.o"
+# 	"debug/error.o"
+# 	"debug/render.line.o"
+# 	"debug/print.o"
+# 	"debug/parsing.o"
+# 	"debug/ray.o"
+# 	"debug/map.o"
+# 	"parsing/utils.1.o"
+# 	"parsing/params.o"
+# 	"parsing/line/color.o"
+# 	"parsing/line/texture.o"
+# 	"parsing/line/file_list/list.o"
+# 	"parsing/line/entry.o"
+# 	"parsing/dup_map_squared.o"
+# 	"parsing/ft_cub3d_split.o"
+# 	"parsing/entry.o"
+# 	"parsing/map/check.door.surrounded.o"
+# 	"parsing/map/check.surrounded.o"
+# 	"parsing/map/entry.o"
+# 	"parsing/map/content.o"
+# 	"error/set/texture.o"
+# 	"error/set/params.o"
+# 	"error/set/entry.o"
+# 	"error/print/malloc.o"
+# 	"error/print/params.known.o"
+# 	"error/print/texture.known.o"
+# 	"error/print/texture.o"
+# 	"error/print/error_no_print.o"
+# 	"error/print/params.o"
+# 	"error/print/entry.o"
+# 	"error/print/params.color.o"
+# 	"error/utils.o"
+# 	"main.o"
+# 	"dataset/init/player.o"
+# 	"dataset/init/mlx.hook.mouse.o"
+# 	"dataset/init/rendering.o"
+# 	"dataset/init/texture.o"
+# 	"dataset/init/minimap.o"
+# 	"dataset/init/mlx.hook.o"
+# 	"dataset/init/config.o"
+# 	"dataset/init/file.o"
+# 	"dataset/init/mlx.o"
+# 	"dataset/init/parse.o"
+# 	"dataset/free/texture.o"
+# 	"dataset/free/mlx.hook.o"
+# 	"dataset/free/config.o"
+# 	"dataset/free/file.o"
+# 	"dataset/free/mlx.o"
+# 	"dataset/free/parse.o"
 # )
 
-STEP_ID=0
-STEP_NB="${#FILES[@]}"
+FILES=(
+	"file.1.o"
+	"file.2.o"
+	"file.3.o"
+	"file.4.o"
+	"file.with.long.name.o"
+	"file.with.very.very.very.long.name.o"
+)
+
+PB_STEP_ID=0
+PB_STEP_NB="${#FILES[@]}"
 
 PG_LEN=40
 PG_FULL="="
@@ -121,14 +121,14 @@ function	ansi_up()
 {
 	local	nb_dir="${1}"
 
-	ansi_print_esc "[${nb_dir}A"
+	ansi_print_esc "[${nb_dir}F"
 }
 
 function	ansi_down()
 {
 	local	nb_dir="${1}"
 
-	ansi_print_esc "[${nb_dir}B"
+	ansi_print_esc "[${nb_dir}E"
 }
 
 function	ansi_clear_line()
@@ -154,13 +154,13 @@ function	pg_first_line()
 {
 	local	desc="${1}"
 
-	printf "(%d/%d) " $((STEP_ID + 1)) "${STEP_NB}"
+	printf "(%d/%d) " $((PB_STEP_ID + 1)) "${PB_STEP_NB}"
 	printf "%s\n" "${desc}"
 }
 
 function	pg_print_percentage()
 {
-	CURRENT_PERCENTAGE=$(((STEP_ID * 100) / ${STEP_NB}))
+	CURRENT_PERCENTAGE=$(((PB_STEP_ID * 100) / ${PB_STEP_NB}))
 	printf "${CURRENT_PERCENTAGE}%%"
 	printf " %.0s" $(seq 1 $((4 - ${#CURRENT_PERCENTAGE})))
 }
@@ -198,7 +198,7 @@ function	pg_print()
 	pg_first_line ${file_name}
 	pg_second_line
 	echo
-	((STEP_ID++))
+	((PB_STEP_ID++))
 }
 
 function	pg_done()
@@ -206,7 +206,7 @@ function	pg_done()
 	local	title="${1}"
 	local	elapsed
 
-	((STEP_ID--))
+	((PB_STEP_ID--))
 	pg_clean_up 2
 	get_ts_ms
 	elapsed=$((${CURRENT_TS} - ${PG_BEGIN_TS}))
@@ -217,8 +217,10 @@ ansi_down 2
 
 for file in "${FILES[@]}"; do
 	pg_print "${file}"
-	sleep 0.01
+	sleep 0.2
 done
 
 pg_done "obj"
+
+ansi_print_esc "[?25h"
 
