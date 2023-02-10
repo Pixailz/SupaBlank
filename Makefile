@@ -25,7 +25,7 @@ PB_STEP_ID						:= 0
 
 PB_LENGTH						:= 30
 PB_CHAR_EMPTY					:= "\ "
-PB_CHAR_FULL					:= =
+PB_CHAR_FULL					:= "="
 PB_CHAR_HEAD					:= >
 
 ANSI_ESC						:= \033
@@ -39,20 +39,17 @@ define pg_obj
 	$(PRINTF) "(%d/%d) " $(shell echo $$(($(PB_STEP_ID) + 1))) $(PB_STEP_NB)
 	$(PRINTF) "$1\n"
 
-	$(eval CURRENT_POURCENT=$(shell echo $$((($(PB_STEP_ID) * 100) / $(PB_STEP_NB)))))
+	$(eval CURRENT_POURCENT:=$(shell echo $$((($(PB_STEP_ID) * 100) / $(PB_STEP_NB)))))
 	$(PRINTF) "%s%%" $(CURRENT_POURCENT)
 	$(PRINTF) " %.0s" $(shell seq 1 $$((4 - `echo -n $(CURRENT_POURCENT) | wc -m`)))
 
-	$(eval PB_FULL := "")
-ifneq ($(CURRENT_POURCENT),0)
+	$(if $(filter-out $(CURRENT_POURCENT),0),$(eval PB_FULL := $(shell printf "$(PB_CHAR_FULL)%.0s" $(shell echo `seq 2 $$(( $(CURRENT_POURCENT) * $(PB_LENGTH) / 100))` ))))
 
-	$(eval PB_FULL := $(shell printf "$(PB_CHAR_FULL)%.0s" $(shell echo `seq 2 $$(( $(CURRENT_POURCENT) * $(PB_LENGTH) / 100))` )))
-	$(PRINTF) ""
-endif
-	$(PRINTF) "[$(PB_FULL)$(PB_CHAR_HEAD)$(PB_CHAR_EMPTY)]" ""
-	$(PRINTF) "|\n"
+	$(eval PB_EMPTY:=$(shell printf "${PG_EMPTY}%.0s" $(shell echo `seq 2 $$((PG_LEN - `echo $(PB_FULL) | wc -m`))`) ))
+	$(PRINTF) "[$(PB_FULL)$(PB_CHAR_HEAD)$(PB_EMPTY)]\n"
 	$(PRINTF) "$(ANSI_ESC)[2F"
 	$(eval PB_STEP_ID=$(shell echo $$(($(PB_STEP_ID)+1))))
+
 endef
 
 
