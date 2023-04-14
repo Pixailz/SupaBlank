@@ -20,24 +20,32 @@ DOWN_0				:="⠀"
 PB_INIT				= $(eval PB_BEGIN_TS:=$(GET_TS)) $(eval PB_INDEX:=0)
 ELAPSED_GOTO_COL	= $(call GOTO_COL,$(shell echo $$(($(SCREEN_COL) - $(1)))))
 
-PB_PRINT_ELAPSED	= \
+PB_PRINT_ELAPSED = \
 $(eval PB_ELAPSED:=$(call GET_ELAPSED,$(PB_BEGIN_TS)))							\
-$(eval PB_ELASPED_LEN:=$(shell printf "$(PB_ELAPSED)" | wc -c))					\
-$(call ELAPSED_GOTO_COL,(14 + $(PB_ELASPED_LEN)))								\
+$(eval PB_ELAPSED_LEN:=$(shell printf "$(PB_ELAPSED)" | wc -c))					\
+$(eval export PB_ELAPSED_LAST_POS:=$(shell echo $$(($(SCREEN_COL) - (14 + $(PB_ELAPSED_LEN))))))	\
+$(call GOTO_COL,$(PB_ELAPSED_LAST_POS))											\
 printf "(elapsed: $(G)$(PB_ELAPSED)$(RST) ms)\n";
 
-PB_PRINT_INDEX		= printf "($(G)$(PB_INDEX)$(RST)/$(R)$(OBJ_C_NB)$(RST))";
 
-PB_GET_CHAR			= DOWN_$(shell echo $$((($(PB_INDEX) * 8) / $(OBJ_C_NB))))
-
-PB_PRINT_PER		= printf " %3d%% " "$$((($(PB_INDEX) * 100) / $(OBJ_C_NB)))";
-
-PB_PRINT_HEADER		= \
+PB_PRINT_HEADER = \
 printf "[$(1)$($(call PB_GET_CHAR))$(RST)] "									; \
 $(call PB_PRINT_INDEX)															\
 $(call PB_PRINT_PER)
 
+PB_GET_CHAR			= DOWN_$(shell echo $$((($(PB_INDEX) * 8) / $(OBJ_C_NB))))
+
+PB_PRINT_INDEX		= \
+printf "($(G)%$(OBJ_C_NB_LEN)d$(RST)/" $(PB_INDEX)								; \
+printf "$(R)$(OBJ_C_NB)$(RST))";
+
+PB_PRINT_PER		= printf " %3d%% " "$$((($(PB_INDEX) * 100) / $(OBJ_C_NB)))";
+
 PB_PRINT			= \
+if [ $(PB_INDEX) -eq 0 ]; then													\
+	$(call P_INF,Creating $(R)objs$(RST))										\
+	printf "\n"																	; \
+fi																				; \
 printf "%b" $(CUDL)																; \
 $(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
 $(call PB_PRINT_HEADER,$(R))													\
@@ -46,13 +54,15 @@ $(call PB_PRINT_ELAPSED)
 
 # printf "%b" $(ESC)1K															; \
 
-PB_DONE				= \
-$(call ELAPSED_GOTO_COL,(14 + $(PB_ELASPED_LEN)))								\
-$(call P_ANSI,1F)															\
-$(call GOTO_COL,1)																\
+PB_DONE = \
+printf "%b" "$(CU)"																; \
+$(call P_ANSI,$(PB_ELAPSED_LAST_POS)G)											\
+$(call P_ANSI,1K)																\
+$(call P_ANSI,0G)																\
 $(call PB_PRINT_HEADER,$(G))													\
-printf "Successfully created obj\n"
+printf "Successfully created $(G)objs$(RST)\n";
 
-PB_TARGET_DONE		= \
-printf "[%b] Successfully created $(R)$(TARGET)$(RST)" $(P)								; \
+PB_TARGET_DONE = \
+$(call PB_PRINT_HEADER,$(G))													\
+printf "Successfully created $(G)$(TARGET)$(RST)"								; \
 $(call PB_PRINT_ELAPSED)
