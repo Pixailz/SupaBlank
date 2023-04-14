@@ -9,5 +9,5 @@ Lib of mk file for a Fancy makefile
    1. display index
    1. eslapsed time on the right of the screen
 
-[!](https://user-images.githubusercontent.com/35565530/232028925-cb3cbd5d-1b5b-4d43-969a-7058d06e56ec.mp4)
-
+demo :
+[!](https://user-images.githubusercontent.com/35565530/232030955-ba93db92-0b21-4930-9424-39322299a34d.mp4)
