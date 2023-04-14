@@ -8,3 +8,6 @@ Lib of mk file for a Fancy makefile
    1. little loading bar with braille unicode char
    1. display index
    1. eslapsed time on the right of the screen
+
+demo :
+[!](https://user-images.githubusercontent.com/35565530/232030955-ba93db92-0b21-4930-9424-39322299a34d.mp4)
