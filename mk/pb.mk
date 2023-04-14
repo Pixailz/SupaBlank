@@ -39,9 +39,9 @@ $(call PB_PRINT_PER)
 
 PB_PRINT			= \
 printf "%b" $(CUDL)																; \
+$(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
 $(call PB_PRINT_HEADER,$(R))													\
 printf "Creating $(@)"															; \
-$(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
 $(call PB_PRINT_ELAPSED)
 
 # printf "%b" $(ESC)1K															; \
