@@ -24,7 +24,7 @@ PB_PRINT_ELAPSED	= \
 $(eval PB_ELAPSED:=$(call GET_ELAPSED,$(PB_BEGIN_TS)))							\
 $(eval PB_ELASPED_LEN:=$(shell printf "$(PB_ELAPSED)" | wc -c))					\
 $(call ELAPSED_GOTO_COL,(14 + $(PB_ELASPED_LEN)))								\
-printf "(elapsed: $(G)$(PB_ELAPSED)$(RST) ms)\n"
+printf "(elapsed: $(G)$(PB_ELAPSED)$(RST) ms)\n";
 
 PB_PRINT_INDEX		= printf "($(G)$(PB_INDEX)$(RST)/$(R)$(OBJ_C_NB)$(RST))";
 
