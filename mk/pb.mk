@@ -18,11 +18,12 @@ DOWN_0				:="⠀"
 
 # FUNCTION
 PB_INIT				= $(eval PB_BEGIN_TS:=$(GET_TS)) $(eval PB_INDEX:=0)
+ELAPSED_GOTO_COL	= $(call GOTO_COL,$(shell echo $$(($(SCREEN_COL) - $(1)))))
 
 PB_PRINT_ELAPSED	= \
 $(eval PB_ELAPSED:=$(call GET_ELAPSED,$(PB_BEGIN_TS)))							\
 $(eval PB_ELASPED_LEN:=$(shell printf "$(PB_ELAPSED)" | wc -c))					\
-$(call P_ANSI,$(shell echo $$(($(SCREEN_COL) - (14 + $(PB_ELASPED_LEN)))))G)	\
+$(call ELAPSED_GOTO_COL,(14 + $(PB_ELASPED_LEN)))								\
 printf "(elapsed: $(G)$(PB_ELAPSED)$(RST) ms)\n"
 
 PB_PRINT_INDEX		= printf "($(G)$(PB_INDEX)$(RST)/$(R)$(OBJ_C_NB)$(RST))";
@@ -39,14 +40,18 @@ $(call PB_PRINT_PER)
 PB_PRINT			= \
 printf "%b" $(CUDL)																; \
 $(call PB_PRINT_HEADER,$(R))													\
-printf "Creating $(@)\n"														; \
-$(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))
+printf "Creating $(@)"															; \
+$(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
+$(call PB_PRINT_ELAPSED)
+
+# printf "%b" $(ESC)1K															; \
 
 PB_DONE				= \
-printf "%b" $(CUDL)																; \
+$(call ELAPSED_GOTO_COL,(14 + $(PB_ELASPED_LEN)))								\
+$(call P_ANSI,1F)															\
+$(call GOTO_COL,1)																\
 $(call PB_PRINT_HEADER,$(G))													\
-printf "Successfully created obj "												; \
-$(call PB_PRINT_ELAPSED)
+printf "Successfully created obj\n"
 
 PB_TARGET_DONE		= \
 printf "[%b] Successfully created $(R)$(TARGET)$(RST)" $(P)								; \

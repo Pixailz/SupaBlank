@@ -20,6 +20,14 @@ endif
 ## Use '>' to instead of tab.
 .RECIPEPREFIX	= >
 
+## check if $(1): is a dir and if $(1) not present, then make it
+MKDIR			= \
+if [ ! -d $(1) -a ! -f $(1) ]; then												\
+	mkdir -p $(1)																;\
+	$(call P_INF,Dir $(1) not found creating it)								\
+	printf "\n"																	;\
+fi
+
 # ANSI
 ESC					:= "\x1b["
 ## COLOR
@@ -54,10 +62,6 @@ P_INF			= printf "[%b] %b" $(I) "$(1)"; $(call PB_PRINT_ELAPSED)
 P_WAR			= printf "[%b] %b" $(W) "$(1)"; $(call PB_PRINT_ELAPSED)
 P_PAS			= printf "[%b] %b" $(P) "$(1)"; $(call PB_PRINT_ELAPSED)
 P_FAI			= printf "[%b] %b" $(F) "$(1)"; $(call PB_PRINT_ELAPSED)
-## check if $(1): is a dir and if $(1) not present, then make it
-MKDIR			= \
-if [ ! -d $(1) -a ! -f $(1) ]; then												\
-	mkdir -p $(1)																;\
-	$(call P_INF,Dir $(1) not found creating it)								\
-	printf "\n"																	;\
-fi
+## ansi mov cursor
+GOTO_COL			= $(call P_ANSI,$(1)G)
+
