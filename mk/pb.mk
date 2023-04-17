@@ -63,11 +63,11 @@ fi
 
 PB_DONE				= \
 printf "%b" "$(CU)"																; \
-$(call P_ANSI,$(shell echo $$(($(PB_ELAPSED_LAST_POS) - 1)))G)					\
+$(call P_ANSI,$(PB_ELAPSED_LAST_POS)G)											\
 $(call P_ANSI,1K)																\
 $(call P_ANSI,0G)																\
 $(call PB_PRINT_HEADER,$(G))													\
-printf "Successfully created $(G)objs$(RST)\n";
+printf "Successfully created $(G)objs$(RST)\n\n";
 
 PB_TARGET_DONE		= \
 $(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
