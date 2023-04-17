@@ -5,10 +5,21 @@ CC					:= gcc
 CFLAGS				:= -Wall -Wextra
 VERSION				:= 1.2.0
 
+## SOME DIRS
+BIN_DIR				:= ./
+SRC_DIR				:= src
+LIB_DIR				:= lib
+OBJ_DIR				:= obj
+INC_DIR				:= inc
 
-# SPECIFY MAKEFILE FLAGS (not working with re)
-# MAKEFLAGS			:= --jobs=$(shell nproc)	# number of jobs
+## LIB CONFIG
+USE_LIBFT			:= 1
+USE_MINI_LIBX		:= 0
+
+# SPECIFY MAKEFILE FLAGS
+# MAKEFLAGS			:= --jobs=$(shell nproc)	# number of jobs (not working with re)
 # MAKEFLAGS			+= --output-sync=target		# sync output, avoid intermixed result
+MAKEFLAGS			:= --no-print-directory
 
 # BASH
 SHELL				:= /usr/bin/bash			# set bash path
@@ -53,14 +64,3 @@ BONUS				:= 0
 endif
 endif
 endif
-
-## SOME DIRS
-BIN_DIR				:= ./
-SRC_DIR				:= src
-LIB_DIR				:= lib
-OBJ_DIR				:= obj
-INC_DIR				:= inc
-
-## LIB CONFIG
-USE_LIBFT			:= 1
-USE_MINI_LIBX		:= 0

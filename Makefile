@@ -73,8 +73,7 @@ endif
 
 print_logo:
 ifeq ($(LOGO_PRINTED),)
-> $(call P_ANSI,)
-> printf "%b\n" $(ASCII_COLOR)"$$ASCII_BANNER$(RST)"
+> printf "%b\n" "$(ASCII_COLOR)$$ASCII_BANNER$(RST)"
 > $(eval export LOGO_PRINTED=1)
 endif
 
@@ -91,8 +90,12 @@ clean:
 > rm -rf $(OBJ_DIR)
 
 clean_all:				clean
+ifeq ($(USE_LIBFT),1)
 > make -C lib/ft_libft clean
+endif
+ifeq ($(USE_MINI_LIBX),1)
 > make -C lib/minilibx-linux clean
+endif
 
 fclean:							clean
 ifeq ($(BONUS),1)
@@ -104,8 +107,12 @@ else
 endif
 
 fclean_all:				fclean
+ifeq ($(USE_LIBFT),1)
 > make -C lib/ft_libft fclean
+endif
+ifeq ($(USE_MINI_LIBX),1)
 > make -C lib/minilibx-linux clean
+endif
 
 ### RE
 re:						setup fclean $(TARGET)
@@ -113,5 +120,9 @@ re:						setup fclean $(TARGET)
 re_all:					re_lib re
 
 re_lib:
+ifeq ($(USE_LIBFT),1)
 > make -C ./lib/ft_libft re
+endif
+ifeq ($(USE_MINI_LIBX),1)
 > make -C ./lib/minilibx-linux re
+endif
