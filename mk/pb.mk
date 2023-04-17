@@ -48,7 +48,7 @@ PB_PRINT_PER		= printf " %3d%% " "$$((($(PB_INDEX) * 100) / $(OBJ_C_NB)))";
 PB_PRINT			= \
 if [ $(PB_INDEX) -eq 0 ]; then													\
 	$(call P_INF,Creating $(R)objs$(RST))										\
-	printf ""																	; \
+	printf "\n\n"																	; \
 fi																				; \
 printf "%b" $(CUDL)																; \
 $(call MKDIR,$(@D))																\
@@ -67,7 +67,7 @@ $(call P_ANSI,$(PB_ELAPSED_LAST_POS)G)											\
 $(call P_ANSI,1K)																\
 $(call P_ANSI,0G)																\
 $(call PB_PRINT_HEADER,$(G))													\
-printf "Successfully created $(G)objs$(RST)\n\n";
+printf "Successfully created $(G)objs$(RST)\n";
 
 PB_TARGET_DONE		= \
 $(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\

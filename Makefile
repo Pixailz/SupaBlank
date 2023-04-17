@@ -22,6 +22,7 @@ bonus:			setup $(TARGET)
 ### TARGETS
 $(TARGET):		$(LIBFT) $(MINI_LIBX) $(OBJ_C)
 > $(call P_INF,Creating $(R)$(TARGET)$(RST))
+> printf "\n\n"
 > $(call PB_PRINT_ELAPSED)
 > $(CC) $(CFLAGS) -o $@ $(OBJ_C) $(LIBS)
 > $(call PB_TARGET_DONE)
