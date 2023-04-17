@@ -1,29 +1,28 @@
-$(eval export MAIN=1) # compat with older Makefile
-
 # include
 include mk/config.mk			# base config
-include mk/pb.mk				# ui thing, progress bar etc
+include mk/utils.mk				# utils function / var
+include mk/lib.mk				# load lib if needed
 include mk/srcs.mk				# srcs.mk
+include mk/pb.mk				# ui thing, progress bar etc
+
+$(call PB_INIT)
 
 # rule
 ## config
 .SILENT:
 
-# .PHONY: setup print_obj_title print_obj_done all bonus ft_helper run run_bonus \
-# debug re re_all re_bonus re_all
-
-.PHONY: print_obj_title
+.PHONY: setup
 
 .DEFAULT: all
 
-all:			setup call_logo $(TARGET)
+all:			setup $(TARGET)
 
-bonus:			setup call_logo $(TARGET)
+bonus:			setup $(TARGET)
 
 ### TARGETS
-$(TARGET): $(LIBFT) $(MINI_LIBX) $(OBJ_C)
-> $(call PB_DONE)
+$(TARGET):		$(LIBFT) $(MINI_LIBX) $(OBJ_C)
 > $(call P_INF,Creating $(R)$(TARGET)$(RST))
+> $(call PB_PRINT_ELAPSED)
 > $(CC) $(CFLAGS) -o $@ $(OBJ_C) $(LIBS)
 > $(call PB_TARGET_DONE)
 
@@ -32,68 +31,84 @@ $(TARGET): $(LIBFT) $(MINI_LIBX) $(OBJ_C)
 # $(<)		: dependencies
 # $(@)		: full target
 # $(@D)		: dir target
-$(OBJ_C):				$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+$(OBJ_C):		$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 > $(call MKDIR,$(@D))
 > $(call PB_PRINT,$(@))
 > gcc $(CFLAGS) -o $@ -c $<
 
 ### LIBS
 $(LIBFT):
+ifeq ($(USE_LIBFT),1)
 > make -C lib/ft_libft all
+endif
 
 $(MINI_LIBX):
+ifeq ($(USE_MINI_LIBX),1)
 > make -C lib/minilibx-linux all
+endif
 
-### DIRS
+setup:	$(BIN_DIR) print_logo print_debug
+
 $(BIN_DIR):
 > $(call MKDIR,$(BIN_DIR))
 
-setup:					$(BIN_DIR)
-> $(call PB_INIT)
+print_debug:
+ifeq ($(shell [ $(DEBUG) -ge 1 ] && printf 1 || printf 0),1)
+> $(call P_INF,RUNTIME INFOS)
+> printf "\t%s"
+> $(call P_WAR,DEBUG: $(DEBUG))
+> printf "\t%s"
+> $(call P_WAR,CFLAGS:)
+> printf "\t\t%s\n" $(CFLAGS)
+> printf "\t%s"
+> $(call P_WAR,.SHELLFLAGS:)
+> printf "\t\t%s\n"  $(.SHELLFLAGS)
+> printf "\t%s"
+> $(call P_WAR,OBJ_C:)
+> printf "\t\t%s\n"  $(OBJ_C)
+> printf "\t%s"
+> $(call P_WAR,SRC_C:)
+> printf "\t\t%s\n"  $(SRC_C)
+endif
 
-call_logo:
-> printf "%b%s%b\n" $(ASCII_COLOR) "$$ASCII_BANNER" "$(RST)"
+print_logo:
+ifeq ($(LOGO_PRINTED),)
+> $(call P_ANSI,)
+> printf "%b\n" $(ASCII_COLOR)"$$ASCII_BANNER$(RST)"
+> $(eval export LOGO_PRINTED=1)
+endif
 
 ft_helper:
-ifeq ($(DEBUG),1)
-> @./scripts/ft_helper/ft_helper
-endif
+> ./scripts/ft_helper/ft_helper
 
 ### RUN
 run:					re
-> ./$(TARGET) ./rsc/map/test.1.cub
-
-run_bonus:				re_bonus
-> ./$(TARGET_BONUS) ./rsc/map/test.1.cub
-
-### DEBUG
-debug:
-> $(call PB_INIT,$(OBJ_C))
+> ./$(TARGET)
 
 ### CLEAN
 clean:
 > $(call P_FAI,Removing obj)
-> $(shell find . -type f -name "*.o" -exec rm {} \;)
+> rm -rf $(OBJ_DIR)
 
 clean_all:				clean
-> @make -C lib/ft_libft clean
-> @make -C lib/minilibx-linux clean
+> make -C lib/ft_libft clean
+> make -C lib/minilibx-linux clean
 
 fclean:							clean
 > $(call P_FAI,Removing $(TARGET))
 > rm -rf $(TARGET)
+> $(call P_FAI,Removing $(TARGET_BONUS))
+> rm -rf $(TARGET_BONUS)
 
 fclean_all:				fclean
-> @make -C lib/ft_libft fclean
-> @make -C lib/minilibx-linux clean
+> make -C lib/ft_libft fclean
+> make -C lib/minilibx-linux clean
 
 ### RE
-re:						setup call_logo fclean all
-re_bonus:				setup call_logo fclean bonus
+re:						setup fclean $(TARGET)
 
 re_all:					re_lib re
 
 re_lib:
-> @make -C lib/ft_libft re
-> @make -C lib/minilibx-linux re
-
+> make -C ./lib/ft_libft re
+> make -C ./lib/minilibx-linux re

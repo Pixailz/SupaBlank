@@ -13,6 +13,7 @@ SRC_C_BONUS			:= utils/utils.1.c								\
 
 ifeq ($(BONUS),1)
 SRC_DIR_F			:= $(SRC_DIR)/bonus
+TARGET				:= $(TARGET_BONUS)
 else
 SRC_DIR_F			:= $(SRC_DIR)/mandatory
 endif
