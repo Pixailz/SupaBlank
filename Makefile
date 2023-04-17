@@ -34,7 +34,6 @@ $(TARGET):		$(LIBFT) $(MINI_LIBX) $(OBJ_C)
 $(OBJ_C):		$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 > $(call PB_PRINT,$(@))
 > gcc $(CFLAGS) -o $@ -c $<
-> sleep .4
 
 ### LIBS
 $(LIBFT):
