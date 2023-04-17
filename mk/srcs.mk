@@ -9,6 +9,10 @@ SRC_C_BONUS			:= utils/utils.1.c								\
 					   utils/utils.2.c								\
 					   utils/utils.3.c								\
 					   utils/utils.4.c								\
+					   utils/utils.1/utils.1.c								\
+					   utils/utils.1/utils.2.c								\
+					   utils/utils.1/utils.3.c								\
+					   utils/utils.1/utils.4.c								\
 					   main.c
 
 ifeq ($(BONUS),1)

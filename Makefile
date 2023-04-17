@@ -32,9 +32,9 @@ $(TARGET):		$(LIBFT) $(MINI_LIBX) $(OBJ_C)
 # $(@)		: full target
 # $(@D)		: dir target
 $(OBJ_C):		$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
-> $(call MKDIR,$(@D))
 > $(call PB_PRINT,$(@))
 > gcc $(CFLAGS) -o $@ -c $<
+> sleep .4
 
 ### LIBS
 $(LIBFT):
@@ -95,10 +95,13 @@ clean_all:				clean
 > make -C lib/minilibx-linux clean
 
 fclean:							clean
+ifeq ($(BONUS),1)
 > $(call P_FAI,Removing $(TARGET))
 > rm -rf $(TARGET)
+else
 > $(call P_FAI,Removing $(TARGET_BONUS))
 > rm -rf $(TARGET_BONUS)
+endif
 
 fclean_all:				fclean
 > make -C lib/ft_libft fclean

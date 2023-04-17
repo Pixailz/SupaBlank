@@ -25,7 +25,10 @@ $(eval PB_ELAPSED:=$(call GET_ELAPSED,$(PB_BEGIN_TS)))							\
 $(eval PB_ELAPSED_LEN:=$(shell printf "$(PB_ELAPSED)" | wc -c))					\
 $(eval export PB_ELAPSED_LAST_POS:=$(shell echo $$(($(SCREEN_COL) - (13 + $(PB_ELAPSED_LEN))))))	\
 $(call GOTO_COL,$(PB_ELAPSED_LAST_POS))											\
-printf "(elapsed: $(G)$(PB_ELAPSED)$(RST) ms)\n";
+printf "(elapsed: $(G)$(PB_ELAPSED)$(RST) ms)"									; \
+if [ "$(CREATED_DIR)" == true ]; then											\
+	printf "\n"; $(eval CREATED_DIR:=false)										\
+fi																				; \
 
 
 PB_PRINT_HEADER		= \
@@ -41,12 +44,14 @@ printf "$(R)$(OBJ_C_NB)$(RST))";
 
 PB_PRINT_PER		= printf " %3d%% " "$$((($(PB_INDEX) * 100) / $(OBJ_C_NB)))";
 
+
 PB_PRINT			= \
 if [ $(PB_INDEX) -eq 0 ]; then													\
 	$(call P_INF,Creating $(R)objs$(RST))										\
-	printf "\n"																	; \
+	printf ""																	; \
 fi																				; \
 printf "%b" $(CUDL)																; \
+$(call MKDIR,$(@D))																\
 $(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
 $(call PB_PRINT_HEADER,$(R))													\
 printf "Creating $(@)"															; \
@@ -54,7 +59,7 @@ $(call PB_PRINT_ELAPSED)														\
 if [ $(PB_INDEX) -eq $(OBJ_C_NB) ]; then										\
 	$(call PB_DONE)																\
 	printf ""																	; \
-fi																				; \
+fi
 
 PB_DONE				= \
 printf "%b" "$(CU)"																; \
@@ -65,7 +70,9 @@ $(call PB_PRINT_HEADER,$(G))													\
 printf "Successfully created $(G)objs$(RST)\n";
 
 PB_TARGET_DONE		= \
+$(eval PB_INDEX:=$(shell echo $$(($(PB_INDEX) + 1))))							\
+$(eval OBJ_C_NB:=$(shell echo $$(($(OBJ_C_NB) + 1))))							\
 printf "%b" $(CUDL)																; \
 $(call PB_PRINT_HEADER,$(G))													\
-printf "Successfully created $(G)$(TARGET)$(RST)"									; \
+printf "Successfully created $(G)$(TARGET)$(RST)"								; \
 $(call PB_PRINT_ELAPSED)

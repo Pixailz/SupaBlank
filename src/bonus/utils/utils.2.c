@@ -1,4 +1,4 @@
-int	ft_utils_2(void)
+int	ft_utils_6(void)
 {
 	return (2);
 }

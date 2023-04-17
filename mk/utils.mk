@@ -5,7 +5,9 @@ MKDIR			= \
 if [ ! -d $(1) ]; then															\
 	mkdir -p $(1)																; \
 	$(call P_INF,Dir $(1) not found creating it)								\
-fi
+	$(eval CREATED_DIR:=true)													\
+	printf "\n";\
+fi																				; \
 
 ## Timestamps function
 GET_TS				= $(shell date +"%s%3N")
