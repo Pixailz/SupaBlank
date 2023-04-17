@@ -6,7 +6,7 @@ if [ ! -d $(1) ]; then															\
 	mkdir -p $(1)																; \
 	$(call P_INF,Dir $(1) not found creating it)								\
 	$(eval CREATED_DIR:=true)													\
-	printf "\n";\
+	printf "\n"																	; \
 fi																				; \
 
 ## Timestamps function
