@@ -47,7 +47,7 @@ ifeq ($(USE_MINI_LIBX),1)
 > make -C lib/minilibx-linux all
 endif
 
-setup:	$(BIN_DIR) print_logo print_debug corrector
+setup:	$(BIN_DIR) print_logo print_debug
 
 $(BIN_DIR):
 > $(call MKDIR,$(BIN_DIR))
