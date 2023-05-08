@@ -16,14 +16,11 @@ SRC_C_BONUS := main.c \
 			   utils/utils.3.c \
 			   utils/utils.4.c
 
-SRC_PARTS			:= mandatory \
-					   bonus
-
 ifeq ($(BONUS),1)
 TARGET				:= $(TARGET_BONUS)
-SRC_C				:= $(addprefix $(SRC_DIR)/$(word 2,$(SRC_PARTS))/,$(SRC_C_BONUS))
+SRC_C				:= $(addprefix $(SRC_DIR)/bonus/,$(SRC_C_BONUS))
 else
-SRC_C				:= $(addprefix $(SRC_DIR)/$(word 1,$(SRC_PARTS))/,$(SRC_C_MANDATORY))
+SRC_C				:= $(addprefix $(SRC_DIR)/mandatory/,$(SRC_C_MANDATORY))
 endif
 
 # OBJ
