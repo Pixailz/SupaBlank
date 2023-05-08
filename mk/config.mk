@@ -11,6 +11,7 @@ SRC_DIR				:= src
 LIB_DIR				:= lib
 OBJ_DIR				:= obj
 INC_DIR				:= inc
+MK_DIR				:= mk
 
 ## LIB CONFIG
 USE_LIBFT			:= 1
