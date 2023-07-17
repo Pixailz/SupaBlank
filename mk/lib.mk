@@ -7,11 +7,11 @@ LDFLAGS				:= -Llib/minilibx-linux -L/usr/lib -lXext -lX11 -lm -lbsd -lz
 
 ifeq ($(USE_LIBFT),1)
 INC_TMP				+= $(LIB_DIR)/ft_libft/inc
-LDFLAGS				+= $(LIBFT)
+LIBS				+= $(LIBFT)
 endif
 ifeq ($(USE_MINI_LIBX),1)
 INC_TMP				+= $(LIB_DIR)/minilibx-linux
-LDFLAGS				+= $(MINI_LIBX)
+LIBS				+= $(MINI_LIBX)
 endif
 
 INC_DIR				:= $(addprefix -I,$(INC_TMP))
