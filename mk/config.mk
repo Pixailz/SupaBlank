@@ -5,6 +5,16 @@ CC					:= gcc
 CFLAGS				:= -Wall -Wextra
 VERSION				:= 1.2.0
 
+# check if the makefile is called from another or directly called
+ifeq ($(MAIN),1)
+DO_PRINT_USAGE		:= 0
+else
+DO_PRINT_USAGE		:= 1
+endif
+
+MAIN				:= 1
+export MAIN
+
 ## SOME DIRS
 BIN_DIR				:= ./
 SRC_DIR				:= src
