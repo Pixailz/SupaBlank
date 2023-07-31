@@ -77,14 +77,10 @@ ifeq ($(LOGO_PRINTED),)
 > $(eval export LOGO_PRINTED=1)
 endif
 
-### CORRECTOR
+### HELPER
 
-corrector:				export_vars
-> ./rsc/corrector/run
-
-export_vars:
-export MK_DIR
-export SRC_DIR
+helper:
+> ./rsc/helper/run
 
 ### RUN
 run:					re
