@@ -47,7 +47,7 @@ ifeq ($(USE_MINI_LIBX),1)
 > make -C lib/minilibx-linux all
 endif
 
-setup:	$(BIN_DIR) print_logo print_debug
+setup:	$(BIN_DIR) print_logo print_debug helper
 
 $(BIN_DIR):
 > $(call MKDIR,$(BIN_DIR))
@@ -80,7 +80,7 @@ endif
 ### HELPER
 
 helper:
-> ./rsc/helper/run
+> ./rsc/helper/helper
 
 ### RUN
 run:					re
