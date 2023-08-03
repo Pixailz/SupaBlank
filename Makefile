@@ -80,7 +80,7 @@ endif
 ### HELPER
 
 helper:
-> ./rsc/helper/helper
+> HELPER_SETUP_NAME="ft_ping" ./rsc/helper/helper
 
 ### RUN
 run:					re
