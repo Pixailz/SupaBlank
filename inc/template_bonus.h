@@ -46,9 +46,6 @@ int		ft_utils_7(void);
 // utils/utils.4.c
 int		ft_utils_8(void);
 
-// utils/utils.1.c
-int		ft_utils_5(void);
-
 /* ########################################################################## */
 
 #endif // H_TEMPLATE_BONUS_H
