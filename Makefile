@@ -15,9 +15,11 @@ $(call PB_INIT)
 
 .DEFAULT: all
 
-all:			setup $(TARGET)
+workflow:		setup $(TARGET)
 
-bonus:			setup $(TARGET)
+all:			workflow
+
+bonus:			workflow
 
 ### TARGETS
 $(TARGET):		$(LIBS) $(OBJ_C)
@@ -80,7 +82,7 @@ endif
 ### HELPER
 
 helper:
-> HELPER_SETUP_NAME="ft_ping" ./rsc/helper/helper
+> HELPER_SETUP_NAME="SupaBlank" ./rsc/helper/helper
 
 ### RUN
 run:					re
@@ -117,9 +119,6 @@ ifeq ($(USE_MINI_LIBX),1)
 endif
 
 ### RE
-re:						setup fclean $(TARGET)
-
-re_all:					re_lib re
 
 re_lib:
 ifeq ($(USE_LIBFT),1)
@@ -128,3 +127,7 @@ endif
 ifeq ($(USE_MINI_LIBX),1)
 > make -C ./lib/minilibx-linux re
 endif
+
+re:						fclean workflow
+
+re_all:					fclean_all workflow
