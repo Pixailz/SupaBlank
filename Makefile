@@ -82,7 +82,7 @@ endif
 ### HELPER
 
 helper:
-> HELPER_SETUP_NAME="SupaBlank" ./rsc/helper/helper
+> ./rsc/helper/helper -S SupaBlank
 
 ### RUN
 run:					re
