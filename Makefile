@@ -15,11 +15,9 @@ $(call PB_INIT)
 
 .DEFAULT: all
 
-workflow:		setup $(TARGET)
+all:			setup $(TARGET)
 
-all:			workflow
-
-bonus:			workflow
+bonus:			all
 
 ### TARGETS
 $(TARGET):		$(LIBS) $(OBJ_C)
@@ -55,7 +53,7 @@ $(BIN_DIR):
 > $(call MKDIR,$(BIN_DIR))
 
 print_debug:
-ifeq ($(shell [ $(DEBUG) -ge 1 ] && printf 1 || printf 0),1)
+ifeq ($(shell [ $(DEBUG_MAKE) -ge 1 ] && printf 1 || printf 0),1)
 > $(call P_INF,RUNTIME INFOS)
 > printf "\t%s"
 > $(call P_WAR,DEBUG: $(DEBUG))
@@ -128,6 +126,6 @@ ifeq ($(USE_MINI_LIBX),1)
 > make -C ./lib/minilibx-linux re
 endif
 
-re:						fclean workflow
+re:						fclean all
 
-re_all:					fclean_all workflow
+re_all:					fclean_all all

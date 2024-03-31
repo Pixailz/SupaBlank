@@ -23,6 +23,8 @@ else
 SRC_C				:= $(addprefix $(SRC_DIR)/mandatory/,$(SRC_C_MANDATORY))
 endif
 
+CFLAGS				+= -DPROG_NAME='"$(TARGET)"' -DPWD='"$(PWD)"'
+
 # OBJ
 OBJ_C				:= $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRC_C:%.c=%.o))
 OBJ_C_NB			:= $(words $(OBJ_C))

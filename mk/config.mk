@@ -2,8 +2,8 @@
 TARGET				:= prog
 TARGET_BONUS		:= prog_bonus
 CC					:= gcc
-CFLAGS				:= -Wall -Wextra
 VERSION				:= 1.2.0
+CFLAGS				:= -Wall -Wextra -DVERSION='"$(VERSION)"'
 
 # check if the makefile is called from another or directly called
 ifeq ($(MAIN),1)
@@ -44,9 +44,17 @@ endif
 .RECIPEPREFIX		= >
 
 ## DEBUG
-
-ifeq ($(shell [ -z $(DEBUG) ] && printf 1 || printf 0),1)
+ifeq ($(DEBUG),)
 DEBUG				:= 0
+endif
+
+ifeq ($(DEBUG_FD),)
+DEBUG_FD			:= 420
+endif
+CFLAGS				+= -DDEBUG=$(DEBUG) -DDEBUG_FD=$(DEBUG_FD)
+
+ifeq ($(shell [ -z $(DEBUG_MAKE) ] && printf 1 || printf 0),1)
+DEBUG_MAKE			:= 0
 endif
 
 ifeq ($(DEBUG),0)
@@ -74,4 +82,12 @@ else
 BONUS				:= 0
 endif
 endif
+endif
+
+ifeq ($(ANSI_NO_COLOR),1)
+CFLAGS				+= -DANSI_NO_COLOR
+endif
+
+ifeq ($(ANSI_NO_MODIFIER),1)
+CFLAGS				+= -DANSI_NO_MODIFIER
 endif

@@ -20,6 +20,8 @@
 /* ##### */
 
 // main.c
+void	test_include();
+void	test_define();
 int		main(void);
 
 // utils/utils.1.c
