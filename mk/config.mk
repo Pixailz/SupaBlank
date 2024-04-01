@@ -4,7 +4,8 @@ TARGET_BONUS		:= prog_bonus
 CC					:= gcc
 VERSION				:= 1.2.3-rc4
 AUTHOR				:= Pixailz
-CFLAGS				:= -Wall -Wextra
+LDFLAGS				:=
+CFLAGS				:= -Wall -Wextra $(LDFLAGS)
 
 # check if the makefile is called from another or directly called
 ifeq ($(MAIN),1)

@@ -11,7 +11,7 @@ $(call PB_INIT)
 ## config
 .SILENT:
 
-.PHONY: setup $(LIBFT) $(MINI_LIBX)
+.PHONY: setup $(LIBS)
 
 .DEFAULT: all
 
