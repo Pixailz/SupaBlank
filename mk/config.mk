@@ -2,8 +2,9 @@
 TARGET				:= prog
 TARGET_BONUS		:= prog_bonus
 CC					:= gcc
-VERSION				:= 1.2.0
-CFLAGS				:= -Wall -Wextra -DVERSION='"$(VERSION)"'
+VERSION				:= 1.2.3-rc4
+AUTHOR				:= Pixailz
+CFLAGS				:= -Wall -Wextra
 
 # check if the makefile is called from another or directly called
 ifeq ($(MAIN),1)
@@ -44,14 +45,14 @@ endif
 .RECIPEPREFIX		= >
 
 ## DEBUG
-ifeq ($(DEBUG),)
-DEBUG				:= 0
-endif
-
-ifeq ($(DEBUG_FD),)
-DEBUG_FD			:= 420
-endif
-CFLAGS				+= -DDEBUG=$(DEBUG) -DDEBUG_FD=$(DEBUG_FD)
+DEBUG				?= 0
+DEBUG_FD			?= 420
+CFLAGS				+= \
+	-DPWD='"$(PWD)"' \
+	-DDEBUG=$(DEBUG) \
+	-DDEBUG_FD=$(DEBUG_FD) \
+	-DVERSION='"$(VERSION)"' \
+	-DAUTHOR='"$(AUTHOR)"'
 
 ifeq ($(shell [ -z $(DEBUG_MAKE) ] && printf 1 || printf 0),1)
 DEBUG_MAKE			:= 0

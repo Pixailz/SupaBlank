@@ -11,7 +11,7 @@ $(call PB_INIT)
 ## config
 .SILENT:
 
-.PHONY: setup
+.PHONY: setup $(LIBFT) $(MINI_LIBX)
 
 .DEFAULT: all
 
@@ -20,7 +20,7 @@ all:			setup $(TARGET)
 bonus:			all
 
 ### TARGETS
-$(TARGET):		$(LIBS) $(OBJ_C)
+$(TARGET):		$(OBJ_C)
 > $(call P_INF,Creating $(R)$(TARGET)$(RST))
 > printf "\n\n"
 > $(call PB_PRINT_ELAPSED)
@@ -39,7 +39,8 @@ $(OBJ_C):		$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 ### LIBS
 $(LIBFT):
 ifeq ($(USE_LIBFT),1)
-> make -C lib/ft_libft all
+> PROG_NAME=$(TARGET) DEBUG=$(DEBUG) DEBUG_FD=$(DEBUG_FD) AUTHOR=$(AUTHOR) \
+	VERSION=$(VERSION) make -C lib/ft_libft all
 endif
 
 $(MINI_LIBX):
@@ -47,7 +48,7 @@ ifeq ($(USE_MINI_LIBX),1)
 > make -C lib/minilibx-linux all
 endif
 
-setup:	$(BIN_DIR) print_logo print_debug helper
+setup:	$(BIN_DIR) print_logo print_debug $(LIBS) helper
 
 $(BIN_DIR):
 > $(call MKDIR,$(BIN_DIR))
