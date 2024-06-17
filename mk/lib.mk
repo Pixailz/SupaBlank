@@ -14,5 +14,5 @@ LIBS				+= $(MINI_LIBX)
 LDFLAGS				+= -Llib/minilibx-linux -L/usr/lib -lXext -lX11 -lm -lbsd -lz
 endif
 
-INC_DIR				:= $(addprefix -I,$(INC_TMP))
-CFLAGS				+= $(LDFLAGS) $(INC_DIR)
+CFLAGS				+= $(addprefix -I,$(INC_TMP))
+

@@ -24,7 +24,7 @@ $(TARGET):		$(OBJ_C)
 > $(call P_INF,Creating $(R)$(TARGET)$(RST))
 > printf "\n\n"
 > $(call PB_PRINT_ELAPSED)
-> $(CC) $(CFLAGS) -o $@ $(OBJ_C) $(LIBS)
+> $(CC) $(CFLAGS) -o $@ $(OBJ_C) $(LIBS) $(LDFLAGS)
 > $(call PB_TARGET_DONE)
 
 ## objs
@@ -34,7 +34,7 @@ $(TARGET):		$(OBJ_C)
 # $(@D)		: dir target
 $(OBJ_C):		$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 > $(call PB_PRINT,$(@))
-> gcc $(CFLAGS) -o $@ -c $<
+> gcc $(CFLAGS) -o $@ $(LDFLAGS) -c $<
 
 ### LIBS
 $(LIBFT):
