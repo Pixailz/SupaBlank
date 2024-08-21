@@ -20,21 +20,25 @@
 /* ##### */
 
 // data/parsing/cmd/help.c
-void		help_header(void);
-void		help_part_1(void);
-void		help_footer(void);
-t_bin		help(void);
+
+void	help_header(void);
+void	help_part_1(void);
+void	help_footer(void);
+t_bin	help(void);
 
 // data/parsing/cmd/usage.c
-t_bin		usage(void);
+
+t_bin	usage(void);
 
 // data/parsing/parse.c
-t_bin		parse_opts(int ac, char **av);
+
+t_bin	parse_opts(int ac, char **av);
 
 // main.c
-void		test_define();
-t_bin		run(int ac, char **av);
-int			main(int ac, char **av);
+
+void	test_define();
+t_bin	run(int ac, char **av);
+int		main(int ac, char **av);
 
 /* ########################################################################## */
 

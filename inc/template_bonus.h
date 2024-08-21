@@ -20,31 +20,40 @@
 /* ##### */
 
 // main.c
-int		main(void);
+
+int	main(void);
 
 // utils/utils.1.c
-int		ft_utils_5(void);
+
+int	ft_utils_5(void);
 
 // utils/utils.1/utils.1.c
-int		ft_utils_1(void);
+
+int	ft_utils_1(void);
 
 // utils/utils.1/utils.2.c
-int		ft_utils_2(void);
+
+int	ft_utils_2(void);
 
 // utils/utils.1/utils.3.c
-int		ft_utils_3(void);
+
+int	ft_utils_3(void);
 
 // utils/utils.1/utils.4.c
-int		ft_utils_4(void);
+
+int	ft_utils_4(void);
 
 // utils/utils.2.c
-int		ft_utils_6(void);
+
+int	ft_utils_6(void);
 
 // utils/utils.3.c
-int		ft_utils_7(void);
+
+int	ft_utils_7(void);
 
 // utils/utils.4.c
-int		ft_utils_8(void);
+
+int	ft_utils_8(void);
 
 /* ########################################################################## */
 
