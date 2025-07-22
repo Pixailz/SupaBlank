@@ -11,9 +11,9 @@ $(call PB_INIT)
 ## config
 .SILENT:
 
-.PHONY: setup $(LIBS)
+.PHONY:			setup $(LIBS)
 
-.DEFAULT: all
+.DEFAULT:		all
 
 all:			setup $(TARGET)
 
@@ -34,7 +34,7 @@ $(TARGET):		$(OBJ_C)
 # $(@D)		: dir target
 $(OBJ_C):		$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 > $(call PB_PRINT,$(@))
-> gcc $(CFLAGS) -o $@ $(LDFLAGS) -c $<
+> $(CC) $(CFLAGS) -o $@ $(LDFLAGS) -c $<
 
 ### LIBS
 $(LIBFT):
